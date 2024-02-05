@@ -6,4 +6,9 @@ Cilj mi je napraviti aplikaciju koja će slati dnevna čitanja na Kindle.
 Kindle ima posebnu email adresu na koju mogu poslati orivitak, primjerice .docx ili .html ili .epub.
 Stoga je plan pročitati tekst s weba, izdvojiti željeni HTML element sa stranice, spremiti to kao novi HTML i poslati ga emailom.
 
+## Email
+
+Email saljemo preko Resend. Ovdje vidimo potrosnju
+
+https://resend.com/settings
 
