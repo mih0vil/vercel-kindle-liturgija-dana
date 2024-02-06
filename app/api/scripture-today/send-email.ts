@@ -1,7 +1,6 @@
 function convertStringToBase64(html: string, encoding: BufferEncoding = 'utf-8') {
     const buffer = Buffer.from(html, encoding);
-    const content = buffer.toString('base64');
-    return content;
+    return buffer.toString('base64');
 }
 
 
@@ -53,9 +52,7 @@ export async function sendEmail(html: string) {
 
     try {
         const res = await fetch(endpoint, requestOptions);
-        const data = await res.json();
-        // console.log({data});
-        return data;
+        return await res.json();
     } catch (error) {
         console.log({error});
         throw error;
