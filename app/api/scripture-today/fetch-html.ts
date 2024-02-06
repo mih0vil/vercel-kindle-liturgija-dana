@@ -18,7 +18,11 @@ export default async function fetchHtml(): Promise<Response> {
             return {error: 'Failed to find liturgija element'};
         }
         liturgija.querySelector('.kalendar_left')?.remove();
-        const sadrzaj = liturgija.outerHTML;
+        const sadrzaj = `<!DOCTYPE html>
+            <html lang="en"><body>
+                ${liturgija.outerHTML}  
+            </body></html>
+        `;
         // const sadrzaj = `${liturgija.textContent}\n\n\n${liturgija.outerHTML}`
         return {html: sadrzaj};
     } catch (error) {
