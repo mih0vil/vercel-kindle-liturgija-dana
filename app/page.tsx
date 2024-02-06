@@ -9,9 +9,9 @@ export default function Home() {
     const [data, formAction] = useFormState(citanjeDanaKindle, '');
     // console.log({data})
     return (
-        <form action={formAction} className={"w-full flex h-screen flex-col items-center justify-center"}>
+        <form action={formAction} className={`w-full flex ${data ? '' : 'h-screen'} flex-col items-center justify-center`}>
             <button type={"submit"} className={"btn-primary"}>Pošalji čitanje dana na Kindle</button>
-            <p>{data}</p>
+            <div dangerouslySetInnerHTML={{__html: data}}/>
         </form>
     );
 }

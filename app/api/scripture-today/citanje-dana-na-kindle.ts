@@ -7,5 +7,5 @@ export default async function citanjeDanaKindle() {
     const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj');
     // console.log({email});
     // return `Email sent ${new Date().toISOString()}`;
-    return `Email sent ${email.SubmittedAt}`;
+    return `Email sent ${email.SubmittedAt} \n ${html}`;
 }
