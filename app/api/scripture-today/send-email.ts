@@ -54,9 +54,10 @@ export async function sendEmail(html: string) {
     try {
         const res = await fetch(endpoint, requestOptions);
         const data = await res.json();
-        console.log({data});
+        // console.log({data});
         return data;
     } catch (error) {
         console.log({error});
+        throw error;
     }
 }
