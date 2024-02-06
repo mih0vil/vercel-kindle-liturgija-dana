@@ -19,6 +19,7 @@ export default async function fetchHtml(): Promise<Response> {
         }
         liturgija.querySelector('.kalendar_left')?.remove();
         const sadrzaj = liturgija.outerHTML;
+        // const sadrzaj = `${liturgija.textContent}\n\n\n${liturgija.outerHTML}`
         return {html: sadrzaj};
     } catch (error) {
         console.error('Error fetching or parsing data:', error);
