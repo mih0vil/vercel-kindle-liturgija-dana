@@ -19,9 +19,9 @@ export default async function fetchHtml(): Promise<Response> {
         }
         liturgija.querySelector('.kalendar_left')?.remove();
         const sadrzaj = `<!DOCTYPE html>
-            <html lang="en">
+            <html lang="en"><body>
                 ${liturgija.outerHTML}  
-            </html>           
+            </body></html>
         `;
         // const sadrzaj = `${liturgija.textContent}\n\n\n${liturgija.outerHTML}`
         return {html: sadrzaj};
