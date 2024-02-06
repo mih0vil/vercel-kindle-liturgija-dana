@@ -1,14 +1,10 @@
 # Slanje čitanja dana na Kindle
 
-Kroz ovaj projekt želim isprobati Bard, s obzirom da nemam iskustva u programinju s NodeJS aplikacijama.
 
 Cilj mi je napraviti aplikaciju koja će slati dnevna čitanja na Kindle.
-Kindle ima posebnu email adresu na koju mogu poslati orivitak, primjerice .docx ili .html ili .epub.
+Kindle ima posebnu email adresu na koju mogu poslati privitak, primjerice .docx ili .html ili .epub.
 Stoga je plan pročitati tekst s weba, izdvojiti željeni HTML element sa stranice, spremiti to kao novi HTML i poslati ga emailom.
+Zapravo, bilo bi zgodno i da pošaljem u jednom dokumentu čitanja dana za cijeli tjedan.
 
-## Email
-
-Email saljemo preko Resend. Ovdje vidimo potrosnju
-
-https://resend.com/settings
+Kroz ovaj projekt želim isprobati Bard.
 
