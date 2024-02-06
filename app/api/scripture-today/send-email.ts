@@ -5,12 +5,13 @@ function convertStringToBase64(html: string, encoding: BufferEncoding = 'utf-8')
 
 
 //send POST request with headers and JSON body using fetch
-export async function sendEmail(html: string) {
+export async function sendEmail(html: string, date: string='') {
     const content = convertStringToBase64(html);
+    const from = process.env.SENDER ?? 'postavi email adresu';
     const to = process.env.KINDLE_EMAIL_ADDRESS ?? 'postavi email adresu';
     const apiKey = process.env.API_KEY ?? 'postavi api key';
     // const naslov = `Liturgija dana ${new Date().toISOString()}`;
-    const naslov = `Liturgija-dana-postmark`;
+    const naslov = `Liturgija dana ${date}`;
 
     const endpoint = 'https://api.postmarkapp.com/email';
     const headers = {
@@ -19,7 +20,7 @@ export async function sendEmail(html: string) {
         "X-Postmark-Server-Token": apiKey,
     };
     const data = {
-        "From": to,
+        "From": from,
         "To": to,
         // "Cc": "copied@example.com",
         // "Bcc": "blind-copied@example.com",

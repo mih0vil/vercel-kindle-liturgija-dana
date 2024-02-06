@@ -2,19 +2,18 @@ import {JSDOM} from 'jsdom';
 
 type Response = {
     html?: string;
+    date?: string;
     error?: string;
 }
 
 export default async function fetchHtml(): Promise<Response> {
     try {
         const now = new Date();
-        const days = [] as string[];
-        for (let i = 0; i < 7; i++) {
-            const date = new Date(now.getTime() + i * 24 * 60 * 60 * 1000);
-            const html = await getHtmlForDate(date);
-            days.push(html);
-        }
-        const html = days.join('\n\n\n<hr/>\n\n\n');
+        const dayOffsets = Array.from({ length: 8 }, (_, i) => i);
+        const days = await Promise.all(dayOffsets.map(
+            (dayOffset) => getHtmlForDate(new Date(now.getTime() + dayOffset * 24 * 60 * 60 * 1000))));
+        const joinString = '\n\n\n<br/><br/><br/><hr/><br/><br/><br/>\n\n\n'
+        const html = days.join(joinString);
         const sadrzaj = `<!DOCTYPE html>
             <html lang="en"><body>
                 ${html}
@@ -22,7 +21,7 @@ export default async function fetchHtml(): Promise<Response> {
         `;
         // const sadrzaj = `${liturgija.textContent}\n\n\n${liturgija.outerHTML}`
         // console.log({sadrzaj})
-        return {html: sadrzaj};
+        return {html: sadrzaj, date: now.toISOString().slice(0, 10)};
     } catch (error) {
         console.error('Error fetching or parsing data:', error);
         return {error: 'Failed to scrape data'};
