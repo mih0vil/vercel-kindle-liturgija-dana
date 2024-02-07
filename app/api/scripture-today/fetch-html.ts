@@ -1,4 +1,5 @@
 import {JSDOM} from 'jsdom';
+import {addDays, differenceInDays} from "date-fns";
 
 type Response = {
     html?: string;
@@ -6,12 +7,12 @@ type Response = {
     error?: string;
 }
 
-export default async function fetchHtml(): Promise<Response> {
+export default async function fetchHtml(from: Date, to: Date): Promise<Response> {
     try {
-        const now = new Date();
-        const dayOffsets = Array.from({ length: 8 }, (_, i) => i);
-        const days = await Promise.all(dayOffsets.map(
-            (dayOffset) => getHtmlForDate(new Date(now.getTime() + dayOffset * 24 * 60 * 60 * 1000))));
+        const diff = Math.floor(differenceInDays(to, from));
+        const dayOffsets = Array.from({ length: diff+1 }, (_, i) => i);
+        const days = await Promise.all(
+            dayOffsets.map((dayOffset) => getHtmlForDate(addDays(from, dayOffset))));
         const joinString = '\n\n\n<br/><br/><br/><hr/><br/><br/><br/>\n\n\n'
         const html = days.join(joinString);
         const sadrzaj = `<!DOCTYPE html>
@@ -21,7 +22,7 @@ export default async function fetchHtml(): Promise<Response> {
         `;
         // const sadrzaj = `${liturgija.textContent}\n\n\n${liturgija.outerHTML}`
         // console.log({sadrzaj})
-        return {html: sadrzaj, date: now.toISOString().slice(0, 10)};
+        return {html: sadrzaj};
     } catch (error) {
         console.error('Error fetching or parsing data:', error);
         return {error: 'Failed to scrape data'};
