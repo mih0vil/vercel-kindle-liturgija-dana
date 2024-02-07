@@ -6,7 +6,7 @@ Kindle ima posebnu email adresu na koju mogu poslati privitak, primjerice .docx 
 Stoga je plan pročitati tekst s weba, izdvojiti željeni HTML element sa stranice, spremiti to kao novi HTML i poslati ga emailom.
 Zapravo, bilo bi zgodno i da pošaljem u jednom dokumentu čitanja dana za cijeli tjedan.
 
-Kroz ovaj projekt želim isprobati Bard.
+Kroz ovaj projekt želim isprobati Bard i Vercel, a shvatio sam da moram i isprobati usluge za slanje emailove.
 
 ## Radna okolina
 
