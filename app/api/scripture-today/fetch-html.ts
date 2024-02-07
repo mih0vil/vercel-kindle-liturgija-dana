@@ -1,5 +1,6 @@
 import {JSDOM} from 'jsdom';
-import {addDays, differenceInDays} from "date-fns";
+import {addDays, differenceInDays, format} from "date-fns";
+import {hr} from "date-fns/locale";
 
 type Response = {
     html?: string;
@@ -43,8 +44,9 @@ async function getHtmlForDate(date: Date) {
     if (liturgija === null) {
         throw new Error("Failed to find liturgija element");
     }
+    const naslov = `${format(date, 'EEEE', {locale: hr})} ${formattedDate}`
     liturgija.querySelector('.kalendar_left')?.remove();
-    return `<h1>Dan ${formattedDate}</h1>\n${liturgija.outerHTML}`
+    return `<h1>${naslov}</h1>\n${liturgija.outerHTML}`
 }
 
 function removeTabs(str: string) {

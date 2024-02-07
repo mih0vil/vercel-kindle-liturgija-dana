@@ -1,6 +1,6 @@
 {
   "crons": [{
-    "path": "/api/scripture-today",
-    "schedule": "0 3 * * 5"
+    "path": "/api/next-month",
+    "schedule": "0 0 20 * *"
   }]
 }

@@ -1,12 +1,12 @@
 'use client'
 
-import citanjeDanaKindle from "@/app/api/scripture-today/citanje-dana-na-kindle";
+import {tjedanDanaNaKindle} from "@/app/api/scripture-today/citanje-dana-na-kindle";
 import { useFormState, useFormStatus } from "react-dom";
-import {addDays, formatISO} from "date-fns";
 
 export const dynamic = 'force-dynamic'; // static by default, unless reading the request
 
 export default function Home() {
+    // const [data, formAction] = useFormState(sljedeciMjesec, '');
     const [data, formAction] = useFormState(tjedanDanaNaKindle, '');
     // console.log({data});
 
@@ -28,8 +28,3 @@ function Podatci({data}: { data: string }) {
     )
 }
 
-
-async function tjedanDanaNaKindle() {
-    const now = new Date();
-    return await citanjeDanaKindle(now, addDays(now, 7), `tjedan ${formatISO(now, {representation: 'date'})}`);
-}
