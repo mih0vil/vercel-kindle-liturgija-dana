@@ -14,10 +14,10 @@ export default async function citanjeDanaKindle(from: Date, to: Date, period: st
 }
 
 
-export async function sljedeciMjesec() {
+export async function mjesec(nadodajMjesec: number) {
     // const now = startOfToday()
     const now = new UTCDate();
-    const start = startOfMonth(addMonths(now, 1));
+    const start = startOfMonth(addMonths(now, nadodajMjesec));
     // const end = endOfMonth(start);
     const end = addDays(addMonths(start, 1), -1);
     const period = format(start, 'LLLL yyyy', {locale: hr});
