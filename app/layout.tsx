@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import "./globals.scss";
 import {LocalizedStringProvider} from "@adobe/react-spectrum/i18n";
+import {defaultTheme, Provider} from '@adobe/react-spectrum';
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="hr">
       <body className={inter.className}>
-        <LocalizedStringProvider locale={"hr"} />
+        <Provider theme={defaultTheme}>
+            <LocalizedStringProvider locale={"hr"} />
+        </Provider>
         {children}
       </body>
     </html>
