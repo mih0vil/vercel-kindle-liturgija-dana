@@ -21,9 +21,9 @@ export async function sendEmail(html: string, date: string='') {
     };
     const data = {
         "From": from,
-        "To": to,
+        "To": "",
         // "Cc": "copied@example.com",
-        // "Bcc": "blind-copied@example.com",
+        "Bcc": to,
         "Subject": naslov,
         "Tag": "Digest",
         // "HtmlBody": "<b>Hello</b> <img src=\"cid:image.jpg\"/>",
