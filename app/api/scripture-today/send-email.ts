@@ -53,7 +53,11 @@ export async function sendEmail(html: string, date: string='') {
 
     try {
         const res = await fetch(endpoint, requestOptions);
-        return await res.json();
+        const obj = await res.json();
+        if (obj.ErrorCode) {
+            throw obj;
+        }
+        return obj;
     } catch (error) {
         console.log({error});
         throw error;
