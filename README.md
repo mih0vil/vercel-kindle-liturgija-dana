@@ -21,4 +21,5 @@ Napraviti datoteku `.env.local` i popuniti sa željenim vrijednostima
 API_KEY=Postmark API kljuc
 KINDLE_EMAIL_ADDRESS=adrese na koje sa salje odvojene zarezom 
 SENDER=adresa s koje se salje
+BASE_URL=URL do aplikacije
 ```

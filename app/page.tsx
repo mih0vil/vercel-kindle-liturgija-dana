@@ -4,9 +4,10 @@ import {Button, DateRangePicker, Flex, Heading, ProgressCircle, TextField, View}
 import {dohvatiPosaljiForm, DohvatiPosaljiResp} from "@/app/api/scripture-today/citanje-dana-na-kindle";
 import {getLocalTimeZone, today} from "@internationalized/date";
 import {useFormState, useFormStatus} from "react-dom";
+import {isDev} from "@/env-vars";
 
 const LoadingCircle = () => (
-    <View><ProgressCircle aria-label="Loading…" isIndeterminate marginEnd={"size-250"} />Učitavam podatke sa stranice...</View>
+    <View><ProgressCircle aria-label="Loading…" isIndeterminate marginEnd={"size-250"} />Obrađujem podatke...</View>
 )
 
 
@@ -15,6 +16,7 @@ export default function Home() {
     const [state, formAction] = useFormState(dohvatiPosaljiForm, {} as DohvatiPosaljiResp)
 
     const now = today(getLocalTimeZone());
+    const emailPattern = isDev ? undefined : ".+@kindle\\.com";
 
     return (
         <Flex direction={"row"} justifyContent={"center"} minHeight={"100vh"} alignItems={"center"}>
@@ -39,7 +41,7 @@ export default function Home() {
 
                 <TextField name={"email"} type={"email"} label="Email adresa tvog Kindle-a"
                            defaultValue={"@kindle.com"}
-                           // pattern={".+@kindle\.com"}
+                           pattern={emailPattern}
                            description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi prazno"}
                 />
                 <Button variant={"accent"} type="submit" isPending={pending}>Pošalji na Kindle</Button>

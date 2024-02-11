@@ -25,7 +25,7 @@ export async function sendEmail(html: string, period: string, recepient: string)
         "Subject": naslov,
         "Tag": "Digest",
         // "HtmlBody": "<b>Hello</b> <img src=\"cid:image.jpg\"/>",
-        "TextBody": "Procitaj",
+        "TextBody": `Liturgijsko čitanje dana poslano s aplikacije ${process.env.BASE_URL} \n\n\n\n\n`,
         // "ReplyTo": "reply@example.com",
         "TrackOpens": true,
         "TrackLinks": "None",
@@ -40,8 +40,8 @@ export async function sendEmail(html: string, period: string, recepient: string)
         //     "color":"blue",
         //     "client-id":"12345"
         // },
-        "MessageStream": "outbound"
-        // "MessageStream": "broadcast"
+        // "MessageStream": "outbound"
+        "MessageStream": "broadcast"
     };
     const requestOptions = {
         method: 'POST',

@@ -12,7 +12,7 @@ export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiRe
     const email = formData.get("email")?.toString() ?? undefined;
     const start = parseDate(startDate).toDate("UTC")
     const end = parseDate(endDate).toDate("UTC");
-    const period = `${startDate} - ${endDate}`
+    const period = `${startDate} .. ${endDate}`
     return dohvatiPosalji(start, end, period, email);
 }
 
