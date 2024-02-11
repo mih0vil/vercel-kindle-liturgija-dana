@@ -4,13 +4,41 @@ import {sendEmail} from "@/app/api/scripture-today/send-email";
 import {UTCDate} from "@date-fns/utc";
 import {addDays, addMonths, format, formatISO, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
+import {parseDate} from "@internationalized/date";
 
-export default async function citanjeDanaKindle(from: Date, to: Date, period: string) {
-    const {html} = await fetchHtml(from, to);
-    const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period);
-    // console.log({email});
-    // return `Liturgija dana ${period} \n ${html}`;
-    return `Liturgija dana ${period} poslana ${email.SubmittedAt}  \n ${html}`;
+export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiResp>, formData: FormData) {
+    const startDate = formData.get("startDate")! as string;
+    const endDate = formData.get("endDate")! as string;
+    const email = formData.get("email")?.toString() ?? undefined;
+    const start = parseDate(startDate).toDate("UTC")
+    const end = parseDate(endDate).toDate("UTC");
+    const period = `${startDate} - ${endDate}`
+    return dohvatiPosalji(start, end, period, email);
+}
+
+export type DohvatiPosaljiResp = {
+    html?: string
+    naslov?: string
+    emailSentAt?: string
+    error?: string
+}
+
+export default async function dohvatiPosalji(start: Date, end: Date, period: string, recepient?: string) {
+    const {html} = await fetchHtml(start, end);
+    const naslov = `Liturgija dana ${period}`;
+    if (recepient) {
+        const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period, recepient);
+        return {
+            html,
+            naslov,
+            emailSentAt: email.SubmittedAt,
+        } as DohvatiPosaljiResp;
+    } else {
+        return {
+            html,
+            naslov
+        } as DohvatiPosaljiResp;
+    }
 }
 
 
@@ -21,11 +49,12 @@ export async function mjesec(nadodajMjesec: number) {
     // const end = endOfMonth(start);
     const end = addDays(addMonths(start, 1), -1);
     const period = format(start, 'LLLL yyyy', {locale: hr});
-    return await citanjeDanaKindle(start, end, period);
+    const recepient = process.env.KINDLE_EMAIL_ADDRESS ?? 'postavi email adresu kao varijablu KINDLE_EMAIL_ADDRESS';
+    return await dohvatiPosalji(start, end, period, recepient);
 }
 
 
 export async function tjedanDanaNaKindle() {
     const now = new UTCDate();
-    return await citanjeDanaKindle(now, addDays(now, 8), `tjedan ${formatISO(now, {representation: 'date'})}`);
+    return await dohvatiPosalji(now, addDays(now, 8), `tjedan ${formatISO(now, {representation: 'date'})}`);
 }

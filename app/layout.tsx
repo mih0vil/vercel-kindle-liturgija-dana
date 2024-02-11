@@ -1,11 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.scss";
+import {Providers} from "@/app/Providers";
 import {LocalizedStringProvider} from "@adobe/react-spectrum/i18n";
-import {defaultTheme, Provider} from '@adobe/react-spectrum';
 
-
-const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Slanje citanja dana na Kindle",
@@ -19,11 +16,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="hr">
-      <body className={inter.className}>
-        <Provider theme={defaultTheme}>
-            <LocalizedStringProvider locale={"hr"} />
-        </Provider>
-        {children}
+      <body>
+        <LocalizedStringProvider locale={"hr"} />
+        <Providers>
+              {children}
+          </Providers>
       </body>
     </html>
   );

@@ -5,7 +5,7 @@ export const dynamic = 'force-dynamic'; // static by default, unless reading the
 
 export async function GET(request: Request) {
     try {
-        return new Response(await mjesec(1));
+        return Response.json(await mjesec(1))
     } catch (error) {
         console.error('Greska na /next-month', {error});
         return new Response('Nisam uspio', { status: 500 });
