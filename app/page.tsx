@@ -3,8 +3,9 @@ import {Form} from "@react-spectrum/form";
 import {Button, DateRangePicker, Flex, Heading, ProgressCircle, TextField, View} from "@adobe/react-spectrum";
 import {dohvatiPosaljiForm, DohvatiPosaljiResp} from "@/app/api/scripture-today/citanje-dana-na-kindle";
 import {getLocalTimeZone, today} from "@internationalized/date";
-import {useFormState, useFormStatus} from "react-dom";
+import {useFormState} from "react-dom";
 import {isDev} from "@/env-vars";
+import {useEffect, useState} from "react";
 
 const LoadingCircle = () => (
     <View><ProgressCircle aria-label="Loading…" isIndeterminate marginEnd={"size-250"} />Obrađujem podatke...</View>
@@ -12,15 +13,21 @@ const LoadingCircle = () => (
 
 
 export default function Home() {
-    const {pending} = useFormStatus()
+    // const {pending} = useFormStatus() //ovo ne radi
+    const [pending, setPending] = useState(false)
     const [state, formAction] = useFormState(dohvatiPosaljiForm, {} as DohvatiPosaljiResp)
 
     const now = today(getLocalTimeZone());
     const emailPattern = isDev ? undefined : ".+@kindle\\.com";
 
+    useEffect(() => {
+        setPending(false)
+    }, [state]);
+
+
     return (
         <Flex direction={"row"} justifyContent={"center"} minHeight={"100vh"} alignItems={"center"}>
-            <Form maxWidth="size-6000" validationBehavior="native" action={formAction}>
+            <Form maxWidth="size-6000" validationBehavior="native" action={formAction} onSubmit={() => setPending(true)}>
                 <Heading level={1}>
                     Pošalji čitanja dana za određeni vremenski period
                 </Heading>
@@ -44,7 +51,7 @@ export default function Home() {
                            pattern={emailPattern}
                            description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi prazno"}
                 />
-                <Button variant={"accent"} type="submit" isPending={pending}>Pošalji na Kindle</Button>
+                <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
 
                 {pending ? <LoadingCircle/> : <></>}
                 {state.emailSentAt ? <View>Email je poslan u {state.emailSentAt}</View> : <></>}
