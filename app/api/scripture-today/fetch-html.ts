@@ -37,7 +37,7 @@ async function getHtmlForDate(date: Date) {
     // const url = `https://www.hilp.hr/liturgija-dana/?god=${date.getFullYear()}&mj=${date.getMonth() + 1}&dan=${date.getDate()}`
     const url = `https://www.hilp.hr/liturgija-dana/?god=${year}&mj=${month}&dan=${day}`
     // console.log({url})
-    const response = await fetch(url);
+    const response = await fetch(url, { cache: "force-cache" });
     const html = await response.text();
     const dom = new JSDOM(removeTabs(html));
     const liturgija = dom.window.document.querySelector(".content_txt.liturgija_txt");
