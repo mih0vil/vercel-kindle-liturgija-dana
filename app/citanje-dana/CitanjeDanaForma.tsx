@@ -76,7 +76,7 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
                        defaultValue={sentMailsStats.canSendManually ? lastEmail() : ""}
                        isDisabled={!sentMailsStats.canSendManually}
                        pattern={emailPattern}
-                       description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi prazno"}
+                       description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi ovaj podatak praznim."}
             />
             <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
             <SentEmails sentMailsStats={sentMailsStats}/>
