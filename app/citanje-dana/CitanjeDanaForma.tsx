@@ -2,7 +2,7 @@
 
 import {dohvatiPosaljiForm, DohvatiPosaljiResp} from "@/app/citanje-dana/citanje-dana-na-kindle";
 import {Form} from "@react-spectrum/form";
-import {Button, DateRangePicker, Heading, ProgressCircle, TextField, View} from "@adobe/react-spectrum";
+import {Badge, Button, DateRangePicker, Heading, ProgressCircle, TextField, View} from "@adobe/react-spectrum";
 import {SentEmails} from "@/app/postmark/SentEmails";
 import {FormEvent, useEffect, useState} from "react";
 import {useFormState} from "react-dom";
@@ -82,6 +82,7 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
             <SentEmails sentMailsStats={sentMailsStats}/>
 
             {pending ? <LoadingCircle/> : <></>}
+            {state.error ? <Badge variant="negative">{state.error}</Badge> : <></>}
             {state.emailSentAt ? <View>Email je poslan u {state.emailSentAt}</View> : <></>}
             {state.html
                 ? <View>
