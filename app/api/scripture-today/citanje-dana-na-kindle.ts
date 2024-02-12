@@ -19,6 +19,7 @@ export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiRe
 export type DohvatiPosaljiResp = {
     html?: string
     naslov?: string
+    email?: string
     emailSentAt?: string
     error?: string
 }
