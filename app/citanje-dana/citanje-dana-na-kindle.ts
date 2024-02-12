@@ -1,6 +1,6 @@
 "use server"
-import fetchHtml from "@/app/api/scripture-today/fetch-html";
-import {sendEmail} from "@/app/api/scripture-today/send-email";
+import fetchHtml from "@/app/citanje-dana/fetch-html";
+import {sendEmail} from "@/app/postmark/send-email";
 import {UTCDate} from "@date-fns/utc";
 import {addDays, addMonths, format, formatISO, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
