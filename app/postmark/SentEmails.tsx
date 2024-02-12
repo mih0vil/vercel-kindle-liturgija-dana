@@ -22,7 +22,7 @@ export async function SentEmails({sentMailsStats}: Readonly<SentEmailsProps>) {
             </Content>
         </InlineAlert>}
         <Flex direction={"row"}>
-            <View>Poslano je {sentMailsStats.sentMails} mailova ovaj mjesec. Više info </View>
+            <View>Mogu poslati još {sentMailsStats.remainingMails} mailova ovaj mjesec. Više info </View>
             <ContextualHelp variant="info">
                 <Heading>Objašnjenje</Heading>
                 <Content>
@@ -37,8 +37,8 @@ export async function SentEmails({sentMailsStats}: Readonly<SentEmailsProps>) {
             </ContextualHelp>
         </Flex>
         <Meter
-            label="Koliko mogu još e-mailova poslati ovaj mjesec"
-            valueLabel={`${sentMailsStats.remainingMails} od ${sentMailsStats.totalMails} poruka`}
-            value={sentMailsStats.remainingMails} variant={variant}/>
+            label="Broj poslanih e-mailova ovaj mjesec"
+            valueLabel={`${sentMailsStats.sentMails} od ${sentMailsStats.totalMails} poruka`}
+            value={sentMailsStats.sentMails / sentMailsStats.totalMails * 100} variant={variant}/>
     </>)
 }
