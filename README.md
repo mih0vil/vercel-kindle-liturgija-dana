@@ -22,4 +22,5 @@ API_KEY=Postmark API kljuc
 KINDLE_EMAIL_ADDRESS=adrese na koje sa salje odvojene zarezom 
 SENDER=adresa s koje se salje
 BASE_URL=URL do aplikacije
+VERCEL_URL=*.vercel.app   koristi se samo lokalno
 ```

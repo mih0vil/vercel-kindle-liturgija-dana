@@ -6,13 +6,12 @@ import {addDays, addMonths, format, formatISO, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
 import {parseDate} from "@internationalized/date";
 import {availableMailsToSend} from "@/app/postmark/postmark";
-import {track} from "@vercel/analytics/server";
 
 export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiResp>, formData: FormData) {
     const startDate = formData.get("startDate")! as string;
     const endDate = formData.get("endDate")! as string;
     const email = formData.get("email")?.toString() ?? undefined;
-    track('dohvatiPosaljiForm', {startDate, endDate, email: email ?? ''});
+    // track('dohvatiPosaljiForm', {startDate, endDate, email: email ?? ''});
     const start = parseDate(startDate).toDate("UTC")
     const end = parseDate(endDate).toDate("UTC");
     const period = `${startDate} .. ${endDate}`
