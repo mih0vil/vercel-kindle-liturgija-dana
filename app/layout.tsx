@@ -3,7 +3,7 @@ import "./globals.scss";
 import {Providers} from "@/app/Providers";
 import {LocalizedStringProvider} from "@adobe/react-spectrum/i18n";
 import { Analytics } from '@vercel/analytics/react';
-
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 export const metadata: Metadata = {
   title: "Slanje citanja dana na Kindle",
@@ -23,6 +23,7 @@ export default function RootLayout({
               {children}
           </Providers>
         <Analytics />
+        <SpeedInsights/>
       </body>
     </html>
   );
