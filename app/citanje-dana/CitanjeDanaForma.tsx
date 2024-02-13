@@ -3,8 +3,7 @@
 import {dohvatiPosaljiForm, DohvatiPosaljiResp} from "@/app/citanje-dana/citanje-dana-na-kindle";
 import {Form} from "@react-spectrum/form";
 import {Badge, Button, DateRangePicker, Heading, ProgressCircle, TextField, View} from "@adobe/react-spectrum";
-import {SentEmails} from "@/app/postmark/SentEmails";
-import {FormEvent, useEffect, useState} from "react";
+import {FormEvent, ReactElement, useEffect, useState} from "react";
 import {useFormState} from "react-dom";
 import {getLocalTimeZone, today} from "@internationalized/date";
 import {isDev} from "@/env-vars";
@@ -29,9 +28,10 @@ const lastEmail = () => {
 
 interface CitanjeDanaFormaProps {
     sentMailsStats: AvailableMailsToSendResp
+    SentMails: ReactElement
 }
 
-export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProps>) {
+export function CitanjeDanaForma({sentMailsStats, SentMails}: Readonly<CitanjeDanaFormaProps>) {
     // const {pending} = useFormStatus() //ovo ne radi
     const [pending, setPending] = useState(false)
     const [state, formAction] = useFormState(dohvatiPosaljiForm, {} as DohvatiPosaljiResp)
@@ -79,7 +79,7 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
                        description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi ovaj podatak praznim."}
             />
             <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
-            <SentEmails sentMailsStats={sentMailsStats}/>
+            {SentMails}
 
             {pending ? <LoadingCircle/> : <></>}
             {state.error ? <Badge variant="negative">{state.error}</Badge> : <></>}

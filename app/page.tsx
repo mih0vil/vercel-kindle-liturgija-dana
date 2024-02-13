@@ -1,6 +1,7 @@
 import {Flex,} from "@adobe/react-spectrum";
 import {CitanjeDanaForma} from "@/app/citanje-dana/CitanjeDanaForma";
 import {availableMailsToSend} from "@/app/postmark/postmark";
+import {SentEmails} from "@/app/postmark/SentEmails";
 
 
 export default async function Home() {
@@ -8,7 +9,7 @@ export default async function Home() {
 
     return (
         <Flex direction={"row"} justifyContent={"center"} minHeight={"100vh"} alignItems={"center"}>
-            <CitanjeDanaForma sentMailsStats={sentMailsStats}/>
+            <CitanjeDanaForma sentMailsStats={sentMailsStats} SentMails={<SentEmails sentMailsStats={sentMailsStats}/>}/>
         </Flex>
     );
 }

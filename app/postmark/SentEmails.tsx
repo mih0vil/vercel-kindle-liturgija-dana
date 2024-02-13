@@ -1,5 +1,3 @@
-"use client"
-
 import {Content, ContextualHelp, Heading, Meter, View, Text, Flex, InlineAlert} from "@adobe/react-spectrum";
 import {AvailableMailsToSendResp} from "@/app/postmark/postmark";
 
