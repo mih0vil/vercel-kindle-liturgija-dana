@@ -53,7 +53,9 @@ export function CitanjeDanaForma({sentMailsStats, SentMails}: Readonly<CitanjeDa
     }
 
     return (
-        <Form maxWidth="size-6000" validationBehavior="native" action={formAction} onSubmit={onSubmit}>
+        <Form maxWidth="size-6000" marginX={"size-100"}
+              validationBehavior="native"
+              action={formAction} onSubmit={onSubmit}>
             <Heading level={1}>
                 Pošalji čitanja dana za određeni vremenski period
             </Heading>
