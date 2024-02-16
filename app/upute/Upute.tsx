@@ -5,7 +5,10 @@ import Image from "next/image";
 
 import emailAdresa from "./email adresa.png";
 
-
+/**
+ * Komponenta s uputama o korištenju aplikacije
+ * @constructor
+ */
 export function Upute() {
     return (
         <DialogTrigger type="modal" mobileType="tray" isDismissable >

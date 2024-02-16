@@ -3,7 +3,10 @@ import {CitanjeDanaForma} from "@/app/citanje-dana/CitanjeDanaForma";
 import {availableMailsToSend} from "@/app/postmark/postmark";
 import {SentEmails} from "@/app/postmark/SentEmails";
 
-
+/**
+ * Glavna stranica
+ * @constructor
+ */
 export default async function Home() {
     const sentMailsStats = await availableMailsToSend();
 

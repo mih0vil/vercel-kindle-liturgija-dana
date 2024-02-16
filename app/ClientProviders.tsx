@@ -3,7 +3,12 @@
 import {useRouter} from 'next/navigation';
 import {Provider, defaultTheme} from '@adobe/react-spectrum';
 
-export function ClientProviders({children}: React.PropsWithChildren) {
+/**
+ * Provideri za klijentske komponente
+ * @param children
+ * @constructor
+ */
+export function ClientProviders({children}: Readonly<React.PropsWithChildren>) {
     let router = useRouter();
 
     return (

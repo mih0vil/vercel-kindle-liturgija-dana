@@ -10,7 +10,10 @@ const headers = {
     "X-Postmark-Server-Token": apiKey,
 };
 
-
+/**
+ * Generiči GET prema Postmark API
+ * @param endpoint
+ */
 export async function postmarkApiGet(endpoint: string) {
     const requestOptions = {
         method: 'GET',
@@ -30,7 +33,9 @@ export async function postmarkApiGet(endpoint: string) {
     }
 }
 
-
+/**
+ * Broj poslanih poruka u tekućem mjesecu
+ */
 async function numberOfSentEmails() {
     const now = new UTCDate();
     const start = startOfMonth(now);
@@ -51,6 +56,9 @@ export type AvailableMailsToSendResp = {
     canSendManually: boolean;
 }
 
+/**
+ * Statistika o poslanim mailovima te koliko još mailove se može poslati u tekućem mjesecu
+ */
 export async function availableMailsToSend() {
     const sentMails = await numberOfSentEmails();
     const totalMails = 100;

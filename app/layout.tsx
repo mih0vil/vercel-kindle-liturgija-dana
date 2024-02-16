@@ -11,6 +11,11 @@ export const metadata: Metadata = {
   description: "Slanje citanja dana na Kindle",
 };
 
+/**
+ * Root lazout koji sadrži providere
+ * @param children
+ * @constructor
+ */
 export default function RootLayout({
   children,
 }: Readonly<{

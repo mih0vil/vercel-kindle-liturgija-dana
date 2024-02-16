@@ -10,7 +10,10 @@ import {isDev} from "@/env-vars";
 import {AvailableMailsToSendResp} from "@/app/postmark/postmark";
 import {Upute} from "@/app/upute/Upute";
 
-
+/**
+ * Loading komponenta
+ * @constructor
+ */
 const LoadingCircle = () => (
     <View><ProgressCircle aria-label="Loading…" isIndeterminate marginEnd={"size-250"} />Obrađujem podatke...</View>
 )
@@ -18,6 +21,9 @@ const LoadingCircle = () => (
 const emailAddressKey = "emailAddress"
 const initialEmail = "@kindle.com";
 
+/**
+ * Email s kojim se inicijalizira email primatelja. Ako je zabulježen u localstorage, uzima taj.
+ */
 const lastEmail = () => {
     if (typeof window !== "undefined") {
         const email = localStorage.getItem(emailAddressKey);
@@ -32,6 +38,12 @@ interface CitanjeDanaFormaProps {
     SentMails: ReactElement
 }
 
+/**
+ * Fora s glavne stranice
+ * @param sentMailsStats statistika o poslanim mailovima
+ * @param SentMails komponenta s info o poslanim mailovima
+ * @constructor
+ */
 export function CitanjeDanaForma({sentMailsStats, SentMails}: Readonly<CitanjeDanaFormaProps>) {
     // const {pending} = useFormStatus() //ovo ne radi
     const [pending, setPending] = useState(false)

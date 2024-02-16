@@ -6,6 +6,11 @@ type SentEmailsProps = {
     sentMailsStats: AvailableMailsToSendResp
 }
 
+/**
+ * Komponenta sa statistikom poslanih mailova ovoga mjeseca i informacijama koliko se još mailova može poslati
+ * @param sentMailsStats
+ * @constructor
+ */
 export async function SentEmails({sentMailsStats}: Readonly<SentEmailsProps>) {
     const variant: "critical" | "positive" | "warning" = sentMailsStats.canSendManually ? "positive" : "critical"
     return (<>

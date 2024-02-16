@@ -12,6 +12,7 @@ Kroz ovaj projekt želim isprobati Bard i Vercel, a shvatio sam da moram i ispro
 
 * NodeJS 18.19.0
 * Account na https://postmarkapp.com/ radi slanja emaila
+  * treba se registrirati s emailom s kupljene domene pa uzeti njihov API ključ za slanje mail (Server API token)
 
 ### env vars
 
@@ -50,4 +51,7 @@ VERCEL_URL=*.vercel.app   koristi se samo lokalno
   * Namučio sam se s tim datumima koji se prenose između klijentskih i serverskih komponenti.
   * Za slučaj kad ne trebaš zone, čini mi se najjednostavnije koristiti UTC na serverskoj strani.
   * Koristio sam date-fns koji ima svašta.
-    * Zadnji dan u mjesecu mi je smrdao zone pa sam koristio zaobilazni put, a ne njihovu funkciju 
+    * Zadnji dan u mjesecu mi je smrdao zone pa sam koristio zaobilazni put, a ne njihovu funkciju.
+      Bila je drugacija zona za zadnji dan u mjesecu u odnosu na početni dan u mjesecu.
+* Probao sam koristiti Bard i ChatGPT, besplatne verzije
+  * samo sam se naživcirao pokušavajući dobiti što želim. Nisam još vješt u tome ili oni još nisu sazreli.

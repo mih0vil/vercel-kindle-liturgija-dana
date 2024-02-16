@@ -2,11 +2,17 @@
 import fetchHtml from "@/app/citanje-dana/fetch-html";
 import {sendEmail} from "@/app/postmark/send-email";
 import {UTCDate} from "@date-fns/utc";
-import {addDays, addMonths, format, formatISO, startOfMonth} from "date-fns";
+import {addDays, addMonths, format, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
 import {parseDate} from "@internationalized/date";
 import {availableMailsToSend} from "@/app/postmark/postmark";
 
+/**
+ * Server action prima informacije s forme te vraća odgovor od {@link dohvatiPosalji}.
+ * Ako je potrebno slati email, provjerava je li quota prekoračena
+ * @param previousState
+ * @param formData
+ */
 export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiResp>, formData: FormData) {
     const startDate = formData.get("startDate")! as string;
     const endDate = formData.get("endDate")! as string;
@@ -26,6 +32,7 @@ export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiRe
     return dohvatiPosalji(start, end, period, email);
 }
 
+
 export type DohvatiPosaljiResp = {
     html?: string
     naslov?: string
@@ -34,6 +41,14 @@ export type DohvatiPosaljiResp = {
     error?: string
 }
 
+/**
+ * Generira dokument preko {@link fetchHtml} koji se šalje na Kindle ako je unesena email adresa primatelja
+ * @param start
+ * @param end
+ * @param period
+ * @param recepient email adresa primatelja
+ * @return Naslov emaila, HTML dokument i vrijeme slanja emaila
+ */
 export default async function dohvatiPosalji(start: Date, end: Date, period: string, recepient?: string) {
     const {html} = await fetchHtml(start, end);
     const naslov = `Liturgija dana ${period}`;
@@ -52,7 +67,10 @@ export default async function dohvatiPosalji(start: Date, end: Date, period: str
     }
 }
 
-
+/**
+ * Generira dokument za ovaj ili sljedeći mjesec
+ * @param nadodajMjesec 0 za ovaj mjesec, 1 za sljedeći mjesec, N za N mjeseci nakon ovog
+ */
 export async function mjesec(nadodajMjesec: number) {
     // const now = startOfToday()
     const now = new UTCDate();
@@ -64,8 +82,3 @@ export async function mjesec(nadodajMjesec: number) {
     return await dohvatiPosalji(start, end, period, recepient);
 }
 
-
-export async function tjedanDanaNaKindle() {
-    const now = new UTCDate();
-    return await dohvatiPosalji(now, addDays(now, 8), `tjedan ${formatISO(now, {representation: 'date'})}`);
-}

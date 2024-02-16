@@ -8,6 +8,11 @@ type Response = {
     error?: string;
 }
 
+/**
+ * Generira HTML dokument za određeno razdoblje, za svaki dan tog razdoblja
+ * @param from
+ * @param to
+ */
 export default async function fetchHtml(from: Date, to: Date): Promise<Response> {
     try {
         const diff = Math.floor(differenceInDays(to, from));
@@ -30,7 +35,10 @@ export default async function fetchHtml(from: Date, to: Date): Promise<Response>
     }
 }
 
-
+/**
+ * Dohvaća HTML za određeni dan te izdvaja onaj dio koji sadrži čitanje dana
+ * @param date
+ */
 async function getHtmlForDate(date: Date) {
     const formattedDate = date.toISOString().slice(0, 10); // Extract up to the 10th character
     const [ year, month, day] = formattedDate.split('-');

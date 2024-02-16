@@ -1,10 +1,20 @@
+/**
+ * Pretvaranje stringa u base64. Koristi se za pretvorbu primljenog HTML dokumenta
+ * @param html
+ * @param encoding
+ */
 function convertStringToBase64(html: string, encoding: BufferEncoding = 'utf-8') {
     const buffer = Buffer.from(html, encoding);
     return buffer.toString('base64');
 }
 
 
-//send POST request with headers and JSON body using fetch
+/**
+ * Slanje emaila s HTML dokumentom kao privitkom putem Postmark API
+ * @param html
+ * @param period
+ * @param recepient
+ */
 export async function sendEmail(html: string, period: string, recepient: string) {
     const content = convertStringToBase64(html);
     const from = process.env.SENDER ?? 'postavi email adresu';
