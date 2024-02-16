@@ -1,7 +1,7 @@
 # Slanje čitanja dana na Kindle
 
 
-Cilj mi je napraviti aplikaciju koja će slati dnevna čitanja na Kindle.
+Cilj mi je napraviti aplikaciju koja će slati dnevna (liturgijska) čitanja na Kindle.
 Kindle ima posebnu email adresu na koju mogu poslati privitak, primjerice .docx ili .html ili .epub.
 Stoga je plan pročitati tekst s weba, izdvojiti željeni HTML element sa stranice, spremiti to kao novi HTML i poslati ga emailom.
 Zapravo, bilo bi zgodno i da pošaljem u jednom dokumentu čitanja dana za cijeli tjedan.
@@ -30,7 +30,7 @@ VERCEL_URL=*.vercel.app   koristi se samo lokalno
 
 * Za slanje e-mailova putem aplikacije, najzgodnije je koristiti neku cloud uslugu za slanje mailova kao što je Postmark.
   * Takve usluge zahtijevaju da imaš posebnu domenu na kojoj već imaš registriranu neku email adresu.
-  * Ne možeš koristiti GMail za slanje emailova
+  * Ne možeš koristiti GMail za slanje emailova na tim uslugama. Možda bi se dalo preko nodemailer, nisam probao. 
 * Vercel
   * ima vlastitu usluge koje mjeri performanse stranice (page insights)
   * ima analytics s kojima možeš pratiti statistiku posjeta stranica
@@ -55,3 +55,10 @@ VERCEL_URL=*.vercel.app   koristi se samo lokalno
       Bila je drugacija zona za zadnji dan u mjesecu u odnosu na početni dan u mjesecu.
 * Probao sam koristiti Bard i ChatGPT, besplatne verzije
   * samo sam se naživcirao pokušavajući dobiti što želim. Nisam još vješt u tome ili oni još nisu sazreli.
+
+Ono što je najbitnije, uspio sam si složiti da dobivam svaki mjesec dokument na Kindle koji sadrži čitanja dana
+od svakod dana nadolazećeg mjeseca. 
+
+Vidim da bi se taj koncept mogao koristiti i za neke druge web stranice s kojih bi volio pratiti članke.
+Npr. moglo bi se složiti da 1x tjedno dobiješ najčitanije članke s bitno.net.
+Ili možda uzeti naslove vijesti svakoga dana s HRT vijesti i dostaviti ih 1x tjedno sve skupa.
