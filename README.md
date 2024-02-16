@@ -32,7 +32,7 @@ VERCEL_URL=*.vercel.app   koristi se samo lokalno
   * Takve usluge zahtijevaju da imaš posebnu domenu na kojoj već imaš registriranu neku email adresu.
   * Ne možeš koristiti GMail za slanje emailova na tim uslugama. Možda bi se dalo preko nodemailer, nisam probao. 
 * Vercel
-  * ima vlastitu usluge koje mjeri performanse stranice (page insights)
+  * ima vlastitu uslugu koje mjeri performanse stranice (page insights)
   * ima analytics s kojima možeš pratiti statistiku posjeta stranica
   * može hostati NextJS aplikacije i ima serverless NodeJS funkcije (između ostalog)
   * lagano se namjesti da commit na Git pokreće build
