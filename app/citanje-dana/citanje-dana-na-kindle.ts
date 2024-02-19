@@ -14,22 +14,27 @@ import {availableMailsToSend} from "@/app/postmark/postmark";
  * @param formData
  */
 export async function dohvatiPosaljiForm(previousState: Awaited<DohvatiPosaljiResp>, formData: FormData) {
-    const startDate = formData.get("startDate")! as string;
-    const endDate = formData.get("endDate")! as string;
-    const email = formData.get("email")?.toString() ?? undefined;
-    // track('dohvatiPosaljiForm', {startDate, endDate, email: email ?? ''});
-    const start = parseDate(startDate).toDate("UTC")
-    const end = parseDate(endDate).toDate("UTC");
-    const period = `${startDate} .. ${endDate}`
-    if (email) {
-        const stats = await availableMailsToSend();
-        if (!stats.canSendManually) {
-            return {
-                error: "Ovaj mjesec više ne mogu slati mailove. Probaj ponovno sljedeći mjesec."
-            } as DohvatiPosaljiResp
+    try {
+        const startDate = formData.get("startDate")! as string;
+        const endDate = formData.get("endDate")! as string;
+        const email = formData.get("email")?.toString() ?? undefined;
+        // track('dohvatiPosaljiForm', {startDate, endDate, email: email ?? ''});
+        const start = parseDate(startDate).toDate("UTC")
+        const end = parseDate(endDate).toDate("UTC");
+        const period = `${startDate} .. ${endDate}`
+        if (email) {
+            const stats = await availableMailsToSend();
+            if (!stats.canSendManually) {
+                return {
+                    error: "Ovaj mjesec više ne mogu slati mailove. Probaj ponovno sljedeći mjesec."
+                } as DohvatiPosaljiResp
+            }
         }
+        return dohvatiPosalji(start, end, period, email);
+    } catch (error) {
+        console.error('dohvatiPosaljiForm', {error})
+        return {error: 'Oprostite, dogodila se greška u obradi'} as DohvatiPosaljiResp
     }
-    return dohvatiPosalji(start, end, period, email);
 }
 
 
@@ -50,20 +55,25 @@ export type DohvatiPosaljiResp = {
  * @return Naslov emaila, HTML dokument i vrijeme slanja emaila
  */
 export default async function dohvatiPosalji(start: Date, end: Date, period: string, recepient?: string) {
-    const {html} = await fetchHtml(start, end);
-    const naslov = `Liturgija dana ${period}`;
-    if (recepient) {
-        const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period, recepient);
-        return {
-            html,
-            naslov,
-            emailSentAt: email.SubmittedAt,
-        } as DohvatiPosaljiResp;
-    } else {
-        return {
-            html,
-            naslov
-        } as DohvatiPosaljiResp;
+    try {
+        const {html} = await fetchHtml(start, end);
+        const naslov = `Liturgija dana ${period}`;
+        if (recepient) {
+            const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period, recepient);
+            return {
+                html,
+                naslov,
+                emailSentAt: email.SubmittedAt,
+            } as DohvatiPosaljiResp;
+        } else {
+            return {
+                html,
+                naslov
+            } as DohvatiPosaljiResp;
+        }
+    } catch (error) {
+        console.error('dohvatiPosalji', {error})
+        return {error: 'Oprostite, dogodila se greška u obradi'} as DohvatiPosaljiResp
     }
 }
 
