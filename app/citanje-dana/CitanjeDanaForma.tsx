@@ -9,6 +9,7 @@ import {getLocalTimeZone, today} from "@internationalized/date";
 import {isDev} from "@/env-vars";
 import {AvailableMailsToSendResp} from "@/app/postmark/postmark";
 import {Upute} from "@/app/upute/Upute";
+import {DownloadHtml} from "@/app/citanje-dana/DownloadHtml";
 
 /**
  * Loading komponenta
@@ -96,6 +97,7 @@ export function CitanjeDanaForma({sentMailsStats, SentMails}: Readonly<CitanjeDa
             <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
             {SentMails}
             <Upute/>
+            {state.html ? <DownloadHtml  content={state.html} filename={`${state.naslov}.html`}/> : <></>}
 
             {pending ? <LoadingCircle/> : <></>}
             {state.error ? <Badge variant="negative">{state.error}</Badge> : <></>}
