@@ -24,7 +24,6 @@ export default function RootLayout({
   return (
     <html lang="hr">
       <body>
-        <LocalizedStringProvider locale={"hr"} />
         <Providers>
           <ClientProviders>
             {children}

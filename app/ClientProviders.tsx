@@ -12,7 +12,7 @@ export function ClientProviders({children}: Readonly<React.PropsWithChildren>) {
     let router = useRouter();
 
     return (
-        <Provider theme={defaultTheme} router={{navigate: router.push}}>
+        <Provider theme={defaultTheme} locale={"hr"} router={{navigate: router.push}}>
             {children}
         </Provider>
     );

@@ -11,7 +11,7 @@ const nextConfig = {
     webpack(config, {isServer}) {
         if (!isServer) {
             // Don't include any locale strings in the client JS bundle.
-            config.plugins.push(localesPlugin.webpack({locales: []}));
+            // config.plugins.push(localesPlugin.webpack({locales: []})); //ovo baca gresku kod date range picker
         }
         return config;
     },

@@ -1,4 +1,11 @@
 import {defaultTheme, Provider} from "@adobe/react-spectrum";
+import {createLocalizedStringDictionary, LocalizedStringProvider} from "@adobe/react-spectrum/i18n";
+
+
+const dictionary = createLocalizedStringDictionary([
+    '@react-spectrum/datepicker',
+    '@react-spectrum/contextualhelp',
+]);
 
 /**
  * Provideri za serverske komponente
@@ -6,7 +13,10 @@ import {defaultTheme, Provider} from "@adobe/react-spectrum";
  * @constructor
  */
 export const Providers = ({children}: React.PropsWithChildren) => (
-    <Provider theme={defaultTheme} locale={"hr"}>
-        {children}
-    </Provider>
+    <>
+        <LocalizedStringProvider locale={"hr"} dictionary={dictionary}/>
+        <Provider theme={defaultTheme} locale={"hr"}>
+            {children}
+        </Provider>
+    </>
 )
