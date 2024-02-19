@@ -1,4 +1,3 @@
-import localesPlugin from '@react-aria/optimize-locales-plugin';
 
 
 /** @type {import('next').NextConfig} */
