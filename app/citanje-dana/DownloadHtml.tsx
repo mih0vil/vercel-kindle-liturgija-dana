@@ -7,6 +7,12 @@ type DownloadHtmlProps = {
     filename: string;
 }
 
+/**
+ * Gumb čija akcija sprema dohvaćeni sadržaja u HTML datoteku koja se preuzima na uređaj
+ * @param content
+ * @param filename
+ * @constructor
+ */
 export const DownloadHtml = ({ content, filename }: DownloadHtmlProps) => {
     const handleDownload = () => {
         const blob = new Blob([content], { type: 'text/html' });
@@ -16,6 +22,7 @@ export const DownloadHtml = ({ content, filename }: DownloadHtmlProps) => {
         link.download = filename;
         link.click();
         window.URL.revokeObjectURL(url);
+        link.remove();
     };
 
     return (
