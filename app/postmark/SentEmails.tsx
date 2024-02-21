@@ -1,3 +1,4 @@
+"use client"
 import {Content, ContextualHelp, Heading, Meter, View, Text, Flex, InlineAlert} from "@adobe/react-spectrum";
 import {AvailableMailsToSendResp} from "@/app/postmark/postmark";
 
@@ -11,7 +12,7 @@ type SentEmailsProps = {
  * @param sentMailsStats
  * @constructor
  */
-export async function SentEmails({sentMailsStats}: Readonly<SentEmailsProps>) {
+export function SentEmails({sentMailsStats}: Readonly<SentEmailsProps>) {
     const variant: "critical" | "positive" | "warning" = sentMailsStats.canSendManually ? "positive" : "critical"
     return (<>
         {sentMailsStats.canSendManually ? <></> : <InlineAlert variant="negative">

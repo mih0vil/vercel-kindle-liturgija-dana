@@ -1,3 +1,5 @@
+import {revalidatePath} from "next/cache";
+
 /**
  * Pretvaranje stringa u base64. Koristi se za pretvorbu primljenog HTML dokumenta
  * @param html
@@ -65,6 +67,7 @@ export async function sendEmail(html: string, period: string, recepient: string)
         if (obj.ErrorCode) {
             throw obj;
         }
+        revalidatePath("/");
         return obj;
     } catch (error) {
         console.log({error});

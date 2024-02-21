@@ -18,7 +18,8 @@ export async function postmarkApiGet(endpoint: string) {
     const requestOptions = {
         method: 'GET',
         headers: headers,
-    };
+        cache: 'no-store'
+    } as RequestInit;
 
     try {
         const res = await fetch(endpoint, requestOptions);
