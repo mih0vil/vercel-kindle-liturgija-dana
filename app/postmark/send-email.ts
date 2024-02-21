@@ -31,9 +31,9 @@ export async function sendEmail(html: string, period: string, recepient: string)
     };
     const data = {
         "From": from,
-        "To": "",
+        "To": recepient, //kada saljes na Kindle, mora biti u To: polju
         // "Cc": "copied@example.com",
-        "Bcc": recepient,
+        // "Bcc": recepient,
         "Subject": naslov,
         "Tag": "Digest",
         // "HtmlBody": "<b>Hello</b> <img src=\"cid:image.jpg\"/>",
@@ -52,8 +52,8 @@ export async function sendEmail(html: string, period: string, recepient: string)
         //     "color":"blue",
         //     "client-id":"12345"
         // },
-        "MessageStream": "outbound"
-        // "MessageStream": "broadcast"
+        // "MessageStream": "outbound"
+        "MessageStream": "broadcast"
     };
     const requestOptions = {
         method: 'POST',
