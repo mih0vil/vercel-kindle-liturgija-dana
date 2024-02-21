@@ -52,8 +52,8 @@ export async function sendEmail(html: string, period: string, recepient: string)
         //     "color":"blue",
         //     "client-id":"12345"
         // },
-        // "MessageStream": "outbound"
-        "MessageStream": "broadcast"
+        "MessageStream": "outbound"
+        // "MessageStream": "broadcast"
     };
     const requestOptions = {
         method: 'POST',
