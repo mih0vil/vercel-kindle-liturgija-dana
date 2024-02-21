@@ -5,7 +5,7 @@ import {UTCDate} from "@date-fns/utc";
 import {addDays, addMonths, format, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
 import {parseDate} from "@internationalized/date";
-import {availableMailsToSend} from "@/app/postmark/postmark";
+import {availableMailsToSend, AvailableMailsToSendResp} from "@/app/postmark/postmark";
 
 /**
  * Server action prima informacije s forme te vraća odgovor od {@link dohvatiPosalji}.
@@ -43,6 +43,7 @@ export type DohvatiPosaljiResp = {
     naslov?: string
     email?: string
     emailSentAt?: string
+    sentEmailsStats?: AvailableMailsToSendResp
     error?: string
 }
 
@@ -60,10 +61,12 @@ export default async function dohvatiPosalji(start: Date, end: Date, period: str
         const naslov = `Liturgija dana ${period}`;
         if (recepient) {
             const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period, recepient);
+            const sentEmailsStats = await availableMailsToSend();
             return {
                 html,
                 naslov,
                 emailSentAt: email.SubmittedAt,
+                sentEmailsStats,
             } as DohvatiPosaljiResp;
         } else {
             return {

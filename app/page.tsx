@@ -11,7 +11,7 @@ export default async function Home() {
 
     return (
         <Flex direction={"row"} justifyContent={"center"} minHeight={"100vh"} alignItems={"center"}>
-            <CitanjeDanaForma sentMailsStats={sentMailsStats}/>
+            <CitanjeDanaForma sentMailsInit={sentMailsStats}/>
         </Flex>
     );
 }

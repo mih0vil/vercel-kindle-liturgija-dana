@@ -36,7 +36,7 @@ const lastEmail = () => {
 }
 
 interface CitanjeDanaFormaProps {
-    sentMailsStats: AvailableMailsToSendResp
+    sentMailsInit: AvailableMailsToSendResp
 }
 
 /**
@@ -45,13 +45,14 @@ interface CitanjeDanaFormaProps {
  * @param SentMails komponenta s info o poslanim mailovima
  * @constructor
  */
-export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProps>) {
+export function CitanjeDanaForma({sentMailsInit}: Readonly<CitanjeDanaFormaProps>) {
     // const {pending} = useFormStatus() //ovo ne radi
     const [pending, setPending] = useState(false)
     const [state, formAction] = useFormState(dohvatiPosaljiForm, {} as DohvatiPosaljiResp)
 
     const now = today(getLocalTimeZone());
     const emailPattern = isDev ? undefined : ".+@kindle\\.com";
+    const sentMailsStats = state.sentEmailsStats ?? sentMailsInit
 
     useEffect(() => {
         setPending(false)
