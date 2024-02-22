@@ -11,6 +11,7 @@ import {AvailableMailsToSendResp} from "@/app/postmark/postmark";
 import {Upute} from "@/app/upute/Upute";
 import {DownloadHtml} from "@/app/citanje-dana/DownloadHtml";
 import {SentEmails} from "@/app/postmark/SentEmails";
+import {GitHubRepo} from "@/app/components/GitHubRepo";
 
 /**
  * Loading komponenta
@@ -97,6 +98,7 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
             <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
             <SentEmails sentMailsStats={sentMailsStats}/>
             <Upute/>
+            <GitHubRepo/>
             {state.html ? <DownloadHtml  content={state.html} filename={`${state.naslov}.html`}/> : <></>}
 
             {pending ? <LoadingCircle/> : <></>}
