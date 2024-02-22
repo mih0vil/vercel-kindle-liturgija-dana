@@ -51,11 +51,13 @@ export function Upute() {
                     <View>
                         Na gore opisanoj Amazon stranici, malo niže se nalazi poglavlje {'"Approved Personal Document E-mail List"'}
                         gdje se nalazi popis odobrenih email adresa.
-                        Ovdje trebate nadodati email adresu ove aplikacije (ovako treba izgledati na Amazon stranici):
+                        Ovdje trebate nadodati email adresu ove aplikacije, upravo ovu sa slike niže
+                        (ovako treba izgledati na Amazon stranici):
                         <Image src={emailAdresa} alt={"Email adresa"}
                                objectFit={"contain"}
-                               style={{width: "100%", height: "auto", maxWidth: "23em"}}
+                               style={{width: "100%", height: "auto", maxWidth: "23em", display: "block", marginTop: "0.5em"}}
                         />
+
                     </View>
 
                     <Heading level={3}>
