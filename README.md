@@ -28,7 +28,7 @@ VERCEL_URL=*.vercel.app   koristi se samo lokalno
 
 ## Produkcija
 
-Aplikacija je deployana na https://kindle-liturgija-dana.vercel.app/
+Aplikacija je dostupna na https://kindle-liturgija-dana.vercel.app/
 
 Ukoliko želite primati automatski izrađena mjesečna čitanja na svoj Kindle, 
 javite mi nekako svoju Kindle adresu (pogledajte moj GitHub profil za ime i prezime, ima me na raznim društvenim mrežama).
