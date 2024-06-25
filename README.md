@@ -37,6 +37,10 @@ Možete i ovdje poslati komentar sa svojom adresom:
 
 ## Što sam naučio
 
+* Agregirani dokument neke web stranice
+  * Da bih postigao to što želim, dohvaćao sam HTML web stranice koja me zanima
+  * Koristio sam library _jsdom_ kako bih pomoću _query selectora_ nakon dohvata stranice izvukao sadržaj koji me zanima. 
+  * radio sam nekoliko dohvata različitih ruta i sve spojio u jedan veliki HTML dokument.
 * Za slanje e-mailova putem aplikacije, najzgodnije je koristiti neku cloud uslugu za slanje mailova kao što je Postmark.
   * Takve usluge zahtijevaju da imaš posebnu domenu na kojoj već imaš registriranu neku email adresu.
   * Ne možeš koristiti GMail za slanje emailova na tim uslugama. Možda bi se dalo preko nodemailer, nisam probao. 
