@@ -39,9 +39,10 @@ export function Upute() {
                         </Flex>
                     </View>
                     <View>
-                        Unutar dijela {'"Personal Document Settings"'} ima poglavlje {'"Send-to-Kindle E-Mail Settings"'}
-                        gdje ćete pronaći email adresu svakog vašeg registriranog Kindle uređaja.
-                        To je adresa na koju će se slati dokumenti i koju trebate unijeti u ovu aplikaciju.
+                        Unutar dijela {'"Personal Document Settings"'} ima poglavlje
+                        {'"Send-to-Kindle E-Mail Settings"'} gdje ćete pronaći email adresu svakog vašeg registriranog
+                        Kindle uređaja. To je adresa na koju će se slati dokumenti i koju trebate unijeti u ovu
+                        aplikaciju.
                     </View>
 
                     <Heading level={3}>
@@ -49,8 +50,8 @@ export function Upute() {
                     </Heading>
                     <Divider marginBottom={"size-200"}/>
                     <View>
-                        Na gore opisanoj Amazon stranici, malo niže se nalazi poglavlje {'"Approved Personal Document E-mail List"'}
-                        gdje se nalazi popis odobrenih email adresa.
+                        Na gore opisanoj Amazon stranici, malo niže se nalazi poglavlje
+                        {'"Approved Personal Document E-mail List"'} gdje se nalazi popis odobrenih email adresa.
                         Ovdje trebate nadodati email adresu ove aplikacije, upravo ovu sa slike niže
                         (ovako treba izgledati na Amazon stranici):
                         <Image src={emailAdresa} alt={"Email adresa"}
@@ -67,11 +68,11 @@ export function Upute() {
                     <View>
                         Liturgiju dana možete čitati na <Link href={"https://www.hilp.hr/liturgija-dana"}
                                                               target={"_blank"}>ovoj stranici</Link>.
-                        Ova aplikacija vuće sadržaj od tamo. 
-                        Ako nema Kindle uređaj, možete maknuti obrisati tekst email adrese Kindle-a,
+                        Ova aplikacija vuće sadržaj od tamo.
+                        Ako nemate Kindle uređaj, možete obrisati tekst email adrese Kindle-a,
                         odabrati željeni period i stisnuti gumb za slanje.
-                        Aplikacija će tada povući čitanja dana za svaki dan tog perioda te ih ispisati na dnu aplikacije.
-                        To onda možete putem vašeg browsera spremiti, primjerice isprintati u PDF pa to onda kasnije
+                        Aplikacija će tada povući čitanja dana za svaki dan tog perioda te ih ispisati na dnu stranice.
+                        To onda možete putem vašeg browsera spremiti, primjerice isprintati u PDF koji kasnije
                         možete pročitati u trenutcima kada vam internet nije dostupan.
                     </View>
 

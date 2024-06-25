@@ -80,6 +80,8 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
                 Čitanja se šalju na Kindle e-mail adresu.
                 Tako možete unaprijed preuzeti čitanja dana za neki period i spremiti ih na uređaj pa ih kasnije
                 čitati bez spajanja na internet.
+                Isto tako, moguće je samo izgenerirati dokument
+                koji se onda može spremiti na vaš uređaj, primjerice na vaš mobitel.
             </View>
 
             <DateRangePicker startName={"startDate"} endName={"endDate"} label="Vremenski period" isRequired
@@ -95,7 +97,9 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
                        pattern={emailPattern}
                        description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi ovaj podatak praznim."}
             />
-            <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >Pošalji na Kindle</Button>
+            <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >
+                Pošalji na Kindle
+            </Button>
             <SentEmails sentMailsStats={sentMailsStats}/>
             <Upute/>
             <GitHubRepo/>
