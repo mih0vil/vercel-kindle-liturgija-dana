@@ -22,7 +22,7 @@ export default async function fetchHtml(from: Date, to: Date): Promise<Response>
         const joinString = '\n\n\n<br/><br/><br/><hr/><br/><br/><br/>\n\n\n'
         const html = days.join(joinString);
         const sadrzaj = `<!DOCTYPE html>
-            <html lang="en"><head><meta charset="utf-8"/></head><body>
+            <html lang="en"><head><meta charset="utf-8"/><title>Liturgija dana</title></head><body>
                 ${html}
             </body></html>
         `;

@@ -60,7 +60,7 @@ Možete i ovdje poslati komentar sa svojom adresom:
   * Namučio sam se s tim datumima koji se prenose između klijentskih i serverskih komponenti.
   * Za slučaj kad ne trebaš zone, čini mi se najjednostavnije koristiti UTC na serverskoj strani.
   * Koristio sam date-fns koji ima svašta.
-    * Zadnji dan u mjesecu mi je smrdao zone pa sam koristio zaobilazni put, a ne njihovu funkciju.
+    * Zadnji dan u mjesecu mi je smrdao zone pa sam koristio zaobilazni put, a ne njihovu funkciju _endOfMonth_.
       Bila je drugacija zona za zadnji dan u mjesecu u odnosu na početni dan u mjesecu.
 * Probao sam koristiti Bard i ChatGPT, besplatne verzije
   * samo sam se naživcirao pokušavajući dobiti što želim. Nisam još vješt u tome ili oni još nisu sazreli.
