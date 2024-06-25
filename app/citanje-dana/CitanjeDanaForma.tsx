@@ -50,6 +50,8 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
     // const {pending} = useFormStatus() //ovo ne radi
     const [pending, setPending] = useState(false)
     const [state, formAction] = useFormState(dohvatiPosaljiForm, {} as DohvatiPosaljiResp)
+    const initialEmail = sentMailsStats.canSendManually ? lastEmail() : ""
+    const [email, setEmail] = useState(initialEmail)
 
     const now = today(getLocalTimeZone());
     const emailPattern = isDev ? undefined : ".+@kindle\\.com";
@@ -92,13 +94,13 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
             />
 
             <TextField name={"email"} type={"email"} label="Email adresa tvog Kindle-a"
-                       defaultValue={sentMailsStats.canSendManually ? lastEmail() : ""}
+                       value={email} onChange={setEmail}
                        isDisabled={!sentMailsStats.canSendManually}
                        pattern={emailPattern}
                        description={"Ako želiš samo dohvatiti podatke bez slanja na Kindle, ostavi ovaj podatak praznim."}
             />
             <Button variant={"accent"} type="submit" isDisabled={pending} isPending={pending} >
-                Pošalji na Kindle
+                {email ? "Pošalji na Kindle" : "Pripremi dokument"}
             </Button>
             <SentEmails sentMailsStats={sentMailsStats}/>
             <Upute/>
