@@ -88,8 +88,8 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
 
             <DateRangePicker startName={"startDate"} endName={"endDate"} label="Vremenski period" isRequired
                              defaultValue={{start: now, end: now}}
-                             validate={({start, end}) => {
-                                 return end.compare(start)+1 <= 40 ? true : "Raspon datuma može biti najviše 40 dana"
+                             validate={(range) => {
+                                 return range?.end.compare(range?.start)+1 <= 40 ? true : "Raspon datuma može biti najviše 40 dana"
                              }}
             />
 
