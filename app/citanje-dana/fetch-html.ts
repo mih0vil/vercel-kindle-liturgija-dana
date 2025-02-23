@@ -13,7 +13,7 @@ type Response = {
  * @param from
  * @param to
  */
-export default async function fetchHtml(from: Date, to: Date): Promise<Response> {
+export default async function generateDocument(from: Date, to: Date): Promise<Response> {
     try {
         const diff = Math.floor(differenceInDays(to, from));
         const dayOffsets = Array.from({ length: diff+1 }, (_, i) => i);
@@ -36,27 +36,46 @@ export default async function fetchHtml(from: Date, to: Date): Promise<Response>
 }
 
 /**
+ * Dohvati HTML sa stranice
+ * @param formattedDate
+ */
+async function fetchHtmlContent(formattedDate: string) {
+    // const url = `https://hilp.hr/liturgija-dana/ponedjeljak-24-2-2025/`
+    const url = `https://hilp.hr/liturgija-dana/${formattedDate}/`.replace('č', 'c');
+    // console.log({url})
+    const response = await fetch(url, {cache: "force-cache"});
+    const html = await response.text();
+    return {html, url};
+}
+
+/**
  * Dohvaća HTML za određeni dan te izdvaja onaj dio koji sadrži čitanje dana
  * @param date
  */
 async function getHtmlForDate(date: Date) {
-    const formattedDate = date.toISOString().slice(0, 10); // Extract up to the 10th character
-    const [ year, month, day] = formattedDate.split('-');
-    // const url = `https://www.hilp.hr/liturgija-dana/?god=${date.getFullYear()}&mj=${date.getMonth() + 1}&dan=${date.getDate()}`
-    const url = `https://www.hilp.hr/liturgija-dana/?god=${year}&mj=${month}&dan=${day}`
-    // console.log({url})
-    const response = await fetch(url, { cache: "force-cache" });
-    const html = await response.text();
+    const formattedDate = dateForUrl(date);
+    const {html, url} = await fetchHtmlContent(formattedDate);
     const dom = new JSDOM(removeTabs(html));
-    const liturgija = dom.window.document.querySelector(".content_txt.liturgija_txt");
+    const liturgija = dom.window.document.querySelector("#main-content .et_pb_text_inner");
     if (liturgija === null) {
-        throw new Error("Failed to find liturgija element");
+        const error = new Error("Failed to find liturgija element");
+        console.log({error, date, url})
+        return `<h1>${formattedDate}</h1>\nNisam uspio dohvatiti podatke, provjeri greške na serveru`;
     }
-    const naslov = `${format(date, 'EEEE', {locale: hr})} ${formattedDate}`
-    liturgija.querySelector('.kalendar_left')?.remove();
+    // const naslov = `${format(date, 'EEEE', {locale: hr})} ${formattedDate}`
+    const naslov = formattedDate
     return `<h1>${naslov}</h1>\n${liturgija.outerHTML}`
 }
 
 function removeTabs(str: string) {
     return str.replace(/\t/g, '');
+}
+
+/**
+ * Formatirani datum za URL od liturgije dana
+ * @param date
+ */
+function dateForUrl(date: Date) {
+    //return date of format: ponedjeljak-24-2-2025
+    return format(date, "eeee-d-M-yyyy", { locale: hr })
 }

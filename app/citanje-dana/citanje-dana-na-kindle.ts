@@ -1,5 +1,5 @@
 "use server"
-import fetchHtml from "@/app/citanje-dana/fetch-html";
+import generateDocument from "@/app/citanje-dana/fetch-html";
 import {sendEmail} from "@/app/postmark/send-email";
 import {UTCDate} from "@date-fns/utc";
 import {addDays, addMonths, format, startOfMonth} from "date-fns";
@@ -47,7 +47,7 @@ export type DohvatiPosaljiResp = {
 }
 
 /**
- * Generira dokument preko {@link fetchHtml} koji se šalje na Kindle ako je unesena email adresa primatelja
+ * Generira dokument preko {@link generateDocument} koji se šalje na Kindle ako je unesena email adresa primatelja
  * @param start
  * @param end
  * @param period
@@ -56,7 +56,7 @@ export type DohvatiPosaljiResp = {
  */
 export default async function dohvatiPosalji(start: Date, end: Date, period: string, recepient?: string) {
     try {
-        const {html} = await fetchHtml(start, end);
+        const {html} = await generateDocument(start, end);
         const naslov = `Liturgija dana ${period}`;
         if (recepient) {
             const email = await sendEmail(html ?? 'nisam uspio dohvati sadrzaj', period, recepient);
