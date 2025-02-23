@@ -26,6 +26,18 @@ BASE_URL=URL do aplikacije
 VERCEL_URL=*.vercel.app   koristi se samo lokalno
 ```
 
+### Korisni linkovi i dokumentacija
+
+https://hilp.hr/liturgija-dana/
+
+https://react-spectrum.adobe.com/react-spectrum/
+
+https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions-and-mutations
+
+https://date-fns.org/
+
+https://kindle-liturgija-dana.vercel.app/
+
 ## Produkcija
 
 Aplikacija je dostupna na https://kindle-liturgija-dana.vercel.app/
