@@ -56,15 +56,17 @@ async function getHtmlForDate(date: Date) {
     const formattedDate = dateForUrl(date);
     const {html, url} = await fetchHtmlContent(formattedDate);
     const dom = new JSDOM(removeTabs(html));
-    const liturgija = dom.window.document.querySelector("#main-content .et_pb_text_inner");
+    const liturgija = findLiturgijaElement(dom.window.document.body);
     if (liturgija === null) {
         const error = new Error("Failed to find liturgija element");
         console.log({error, date, url})
         return `<h1>${formattedDate}</h1>\nNisam uspio dohvatiti podatke, provjeri greške na serveru`;
     }
+    cleanDom(liturgija);
     // const naslov = `${format(date, 'EEEE', {locale: hr})} ${formattedDate}`
-    const naslov = formattedDate
-    return `<h1>${naslov}</h1>\n${liturgija.outerHTML}`
+    // const naslov = formattedDate
+    // return `<!--<h1>${naslov}</h1>\n${liturgija.outerHTML}-->`
+    return liturgija.outerHTML;
 }
 
 function removeTabs(str: string) {
@@ -78,4 +80,40 @@ function removeTabs(str: string) {
 function dateForUrl(date: Date) {
     //return date of format: ponedjeljak-24-2-2025
     return format(date, "eeee-d-M-yyyy", { locale: hr })
+}
+
+
+const elementiLiturgije = ['imendan', 'psalam', 'evanđelje'];
+
+
+/**
+ * Pronađi najdublji DOM element koji ima sve potrebne elemente za čitanje
+ * @param parent
+ */
+function findLiturgijaElement(parent: Element): Element | null {
+    const text = parent.textContent?.toLowerCase();
+    if (!text || !elementiLiturgije.every(t => text.includes(t))) return null;
+    //ako netko od djece ima sve potrebne elemente citanja, onda vrati to dijete
+    for (let i = 0; i < parent.children.length; i++) {
+        const child = parent.children[i];
+        const res = findLiturgijaElement(child);
+        if (res) return res;
+    }
+    return parent;
+}
+
+/**
+ * Makni elemente koji imaju samo neke praznine
+ * @param parent
+ */
+function cleanDom(parent: Node) {
+    const q = [] as Node[]
+    parent.childNodes.forEach(child => {
+        if (!child.textContent || child.textContent.trim().length < 3) {
+            q.push(child)
+        } else {
+            cleanDom(child);
+        }
+    })
+    q.forEach(node => node.parentNode?.removeChild(node))
 }
