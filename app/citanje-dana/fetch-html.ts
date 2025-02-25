@@ -109,7 +109,7 @@ function findLiturgijaElement(parent: Element): Element | null {
 function cleanDom(parent: Node) {
     const q = [] as Node[]
     parent.childNodes.forEach(child => {
-        if (!child.textContent || child.textContent.trim().length < 3) {
+        if (child.nodeName !== 'BR' && (!child.textContent || child.textContent.trim().length < 2)) {
             q.push(child)
         } else {
             cleanDom(child);
