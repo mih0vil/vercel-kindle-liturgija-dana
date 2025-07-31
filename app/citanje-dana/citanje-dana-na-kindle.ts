@@ -2,7 +2,7 @@
 import generateDocument from "@/app/citanje-dana/fetch-html";
 import {sendEmail} from "@/app/postmark/send-email";
 import {UTCDate} from "@date-fns/utc";
-import {addDays, addMonths, format, startOfMonth} from "date-fns";
+import {addDays, addMonths, endOfMonth, format, min, startOfMonth} from "date-fns";
 import {hr} from "date-fns/locale";
 import {parseDate} from "@internationalized/date";
 import {availableMailsToSend} from "@/app/postmark/postmark";
@@ -50,7 +50,7 @@ export type DohvatiPosaljiResp = {
  * Generira dokument preko {@link generateDocument} koji se šalje na Kindle ako je unesena email adresa primatelja
  * @param start
  * @param end
- * @param period
+ * @param period tekst perioda za naslov
  * @param recepient email adresa primatelja
  * @return Naslov emaila, HTML dokument i vrijeme slanja emaila
  */
@@ -92,3 +92,16 @@ export async function mjesec(nadodajMjesec: number) {
     return await dohvatiPosalji(start, end, period, recepient);
 }
 
+/**
+ * Cachiraj po 7 dana sljedeceg mjeseca
+ * @param tjedan prvih sedam dana dobijemo s vrijednosti 1, drugih s vrijednosti 2, ...
+ */
+export async function tjedanSljedecegMjeseca(tjedan: number) {
+    const now = new UTCDate();
+    const startOfNextMonth = startOfMonth(addMonths(now, 1));
+    const endOfNextMonth = endOfMonth(startOfNextMonth);
+    const start = min([addDays(startOfNextMonth, (tjedan-1) * 7), endOfNextMonth]);
+    const end = min([addDays(start, 6), endOfNextMonth]);
+    const period = `${format(start, 'd.M.yyyy.', {locale: hr})} - ${format(end, 'd.M.yyyy.', {locale: hr})}`;
+    return await dohvatiPosalji(start, end, period, undefined);
+}

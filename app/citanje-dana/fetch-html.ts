@@ -1,6 +1,7 @@
 import {JSDOM} from 'jsdom';
 import {addDays, differenceInDays, format} from "date-fns";
 import {hr} from "date-fns/locale";
+import {unstable_cache} from "next/cache";
 
 type Response = {
     html?: string;
@@ -16,9 +17,10 @@ type Response = {
 export default async function generateDocument(from: Date, to: Date): Promise<Response> {
     try {
         const diff = Math.floor(differenceInDays(to, from));
-        const dayOffsets = Array.from({ length: diff+1 }, (_, i) => i);
+        const dayOffsets = Array.from({length: diff + 1,}, (_, i) => i);
         const days = await Promise.all(
-            dayOffsets.map((dayOffset) => getHtmlForDate(addDays(from, dayOffset))));
+            // dayOffsets.map((dayOffset) => getHtmlForDate(addDays(from, dayOffset))));
+            dayOffsets.map((dayOffset) => cachedHtmlForDate(addDays(from, dayOffset))));
         const joinString = '\n\n\n<br/><br/><br/><hr/><br/><br/><br/>\n\n\n'
         const html = days.join(joinString);
         const sadrzaj = `<!DOCTYPE html>
@@ -43,7 +45,7 @@ async function fetchHtmlContent(formattedDate: string) {
     // const url = `https://hilp.hr/liturgija-dana/ponedjeljak-24-2-2025/`
     const url = `https://hilp.hr/liturgija-dana/${formattedDate}/`.replace('č', 'c');
     // console.log({url})
-    const response = await fetch(url, {cache: "force-cache"});
+    const response = await fetch(url, {cache: "force-cache", next: {revalidate: 60*60*24*7}});
     const html = await response.text();
     return {html, url};
 }
@@ -69,6 +71,16 @@ async function getHtmlForDate(date: Date) {
     return liturgija.outerHTML;
 }
 
+/**
+ * Cachirani HTML za određeni dan
+ */
+const cachedHtmlForDate = unstable_cache(async (date: Date) => getHtmlForDate(date),
+    [], {
+        tags: ['htmlForDate'],
+        revalidate: 60*60*24*7*2, //2 tjedna
+})
+
+
 function removeTabs(str: string) {
     return str.replace(/\t/g, '');
 }
@@ -79,7 +91,7 @@ function removeTabs(str: string) {
  */
 function dateForUrl(date: Date) {
     //return date of format: ponedjeljak-24-2-2025
-    return format(date, "eeee-d-M-yyyy", { locale: hr })
+    return format(date, "eeee-d-M-yyyy", {locale: hr})
 }
 
 
