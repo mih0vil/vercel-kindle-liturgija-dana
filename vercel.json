@@ -4,24 +4,8 @@
     "schedule": "0 5 20 * *"
   },
   {
-    "path": "/api/week-of-next-month/1",
-    "schedule": "1 4 20 * *"
-  },
-  {
     "path": "/api/week-of-next-month/2",
     "schedule": "2 4 20 * *"
-  },
-  {
-    "path": "/api/week-of-next-month/3",
-    "schedule": "3 4 20 * *"
-  },
-  {
-    "path": "/api/week-of-next-month/4",
-    "schedule": "4 4 20 * *"
-  },
-  {
-    "path": "/api/week-of-next-month/5",
-    "schedule": "5 4 20 * *"
   }
   ]
 }

@@ -1,2 +1,7 @@
+### localhost
 GET http://localhost:3000/api/week-of-next-month/1
+Content-Type: application/json
+
+### Vercel deployana verzija
+GET https://kindle-liturgija-dana.vercel.app/api/week-of-next-month/1
 Content-Type: application/json
