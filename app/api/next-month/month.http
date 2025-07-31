@@ -1,0 +1,3 @@
+### Vercel sljedeci mjesec
+GET https://kindle-liturgija-dana.vercel.app/api/next-month
+Content-Type: application/json
