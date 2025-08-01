@@ -45,7 +45,8 @@ async function fetchHtmlContent(formattedDate: string) {
     // const url = `https://hilp.hr/liturgija-dana/ponedjeljak-24-2-2025/`
     const url = `https://hilp.hr/liturgija-dana/${formattedDate}/`.replace('č', 'c');
     // console.log({url})
-    const response = await fetch(url, {cache: "force-cache", next: {revalidate: 60*60*24*7}});
+    const response = await fetch(url);
+    // const response = await fetch(url, {next: {revalidate: 60*60*24*7}});
     const html = await response.text();
     return {html, url};
 }
