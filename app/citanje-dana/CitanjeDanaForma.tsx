@@ -84,6 +84,11 @@ export function CitanjeDanaForma({sentMailsStats}: Readonly<CitanjeDanaFormaProp
                 čitati bez spajanja na internet.
                 Isto tako, moguće je samo izgenerirati dokument
                 koji se onda može spremiti na vaš uređaj, primjerice na vaš mobitel.
+                <p/>
+                Ukoliko dobijete grešku, pokušajte odabrati kraći vremenski period.
+                Naime, aplikaciju se vrti na jednostavnijim serverima pa ima manje dostupnih resursa za obradu.
+                No ima jedan trik: kada dohvatite kraći vremenski period, on će se zapamtiti pa nakon toga možete probati dohvatiti
+                i veći period, koji uključuje taj prethodni kraći period, i stvari bi mogla raditi.
             </View>
 
             <DateRangePicker startName={"startDate"} endName={"endDate"} label="Vremenski period" isRequired
